@@ -1,0 +1,11 @@
+TI: Realizar un esquema básico para ordenar carpetas utilizando el esquema MVC, tomando en 
+cuenta la convención de nombres internacionales que existe para los archivos (Controller, Model, View, etc.) 
+verificando que dicho esquema sea escalable.
+
+En word, una captura de pantalla con el esquema de carpeta, colocando comentarios del porque de las carpetas
+
+3 tablas, alumno, curso y grado
+1 Tabla -> usuarios (Prof., director, secre)
+
+El prof. podrá descargar un pdf con el listado de los alumnos
+El prof. podrá descagar un formato de Excel, para colocar las calificaciones de los alumnos (5 tareas, 2 exámenes)
