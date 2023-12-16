@@ -25,43 +25,43 @@ $usuarios = $mostrarUsuarios->mostrarUsuariosController();
     </thead>
     <tbody>
         <?php foreach ($usuarios as $usuario) : ?>
-            <tr>
-                <td><?php echo $usuario['DPI']; ?></td>
-                <td><?php echo $usuario['nombre_us']; ?></td>
-                <td><?php echo $usuario['apellido_us']; ?></td>
-                <td><?php echo $usuario['telefono_us']; ?></td>
-                <td><?php echo $usuario['nombre_rol']; ?></td>
-                <td><?php echo $usuario['usuario']; ?></td>
-                <td>
-                    <a href="index.php?action=informacionUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
-                        <button class="btn btn-info">info</button></a>
-                </td>
-                <td>
-                    <a href="index.php?action=editarUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
-                        <button class="btn btn-warning">Editar</button>
-                    </a>
-                </td>
+        <tr>
+            <td><?php echo $usuario['DPI']; ?></td>
+            <td><?php echo $usuario['nombre_us']; ?></td>
+            <td><?php echo $usuario['apellido_us']; ?></td>
+            <td><?php echo $usuario['telefono_us']; ?></td>
+            <td><?php echo $usuario['nombre_rol']; ?></td>
+            <td><?php echo $usuario['usuario']; ?></td>
+            <td>
+                <a href="index.php?action=informacionUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
+                    <button class="btn btn-info">info</button></a>
+            </td>
+            <td>
+                <a href="index.php?action=editarUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
+                    <button class="btn btn-warning">Editar</button>
+                </a>
+            </td>
 
-                <td>
-                    <a href="index.php?action=eliminarUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
-                        <button class="btn btn-danger">Eliminar</button></a>
-                </td>
+            <td>
+                <a href="index.php?action=eliminarUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
+                    <button class="btn btn-danger">Eliminar</button></a>
+            </td>
 
-            </tr>
+        </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
 <script type="text/javascript">
-    let usuarios = <?php echo json_encode($usuarios); ?>;
-    console.log(usuarios);
+let usuarios = <?php echo json_encode($usuarios); ?>;
+console.log(usuarios);
 
-    function editarUsuario(id) {
-        // Lógica para editar el usuario con el ID específico
-        // Puedes redirigir a una página de edición o realizar una acción mediante AJAX
-        console.log(' Editar usuario con ID:', id);
-    }
-    $(document).ready(function() {
-        $('#tablaUser').DataTable();
-    });
+function editarUsuario(id) {
+    // Lógica para editar el usuario con el ID específico
+    // Puedes redirigir a una página de edición o realizar una acción mediante AJAX
+    console.log(' Editar usuario con ID:', id);
+}
+$(document).ready(function() {
+    $('#tablaUser').DataTable();
+});
 </script>

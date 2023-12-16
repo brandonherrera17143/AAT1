@@ -3,6 +3,7 @@
 namespace controller\usuarios;
 
 use model\db\Usuarios;
+use model\db\Profesor;
 
 require_once("helpers/helpers.php");
 
@@ -59,24 +60,35 @@ class UsuariosController
 
     public function seleccionarUsuarioCompletaInfo()
     {
-        // Verificar si se proporcionó un ID de usuario en la URL
         if (isset($_GET['idUser'])) {
             $id = $_GET['idUser'];
 
-            // Llamar al modelo para obtener la información del usuario
-            $respuesta = Usuarios::informacionUsuarioCompletaModel($id);
-
-            // Verificar si se obtuvo una respuesta válida del modelo
+            $obtenerRolUsuario = Usuarios::seleccionarUsuarioModel($id);
+            $rol = $obtenerRolUsuario['id_rol'];
+            echo $rol;
+            if ($rol == 1) {
+                $respuesta = Profesor::mostrarProfesoresCursosGradoModel($id);
+            } else if ($rol == 3) {
+                $respuesta = Usuarios::informacionUsuarioCompletaModel($id);
+            } else {
+                $respuesta = null;
+            }
+            //echo '<pre>';
+            //var_dump($respuesta);
+            //echo '</pre>';
+            //foreach ($respuesta as $rol) {
+            //   $rol['nombre_rol'];
+            //  break;
+            // }
             if ($respuesta) {
-                // Devolver la respuesta para usarla en la vista
+
                 return $respuesta;
             } else {
-                // No se encontraron datos para el usuario con ese ID
-                return null; // O mostrar un mensaje de error
+                return null;
             }
         } else {
-            // No se proporcionó un ID de usuario válido en la URL
-            return null; // O mostrar un mensaje de error
+
+            return null;
         }
     }
 

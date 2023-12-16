@@ -36,7 +36,7 @@ class Usuarios
 
     public static function seleccionarUsuarioModel($id)
     {
-        $stmt = ConexionDB::conectar()->prepare("select usuarios.id_usuario, usuarios.DPI, usuarios.nombre_us, usuarios.apellido_us, usuarios.telefono_us, rol.nombre_rol, usuarios.usuario
+        $stmt = ConexionDB::conectar()->prepare("select usuarios.id_usuario, usuarios.DPI, usuarios.nombre_us, usuarios.apellido_us, usuarios.telefono_us,usuarios.id_rol, rol.nombre_rol, usuarios.usuario
         from usuarios
         inner join  rol on usuarios.id_rol = rol.id_rol where usuarios.id_usuario = :id;");
         $stmt->bindParam(":id", $id, \PDO::PARAM_INT);
@@ -72,17 +72,18 @@ class Usuarios
     public static function informacionUsuarioCompletaModel($id)
     {
         try {
-            $stmt = ConexionDB::conectar()->prepare("select usuarios.nombre_us, grado.nombre_grado, cursos.nombre_curso
-            from detalle_grado_usuario_estudiante
-            inner join usuarios on detalle_grado_usuario_estudiante.id_usuario = usuarios.id_usuario
-            inner join grado on detalle_grado_usuario_estudiante.id_grado = grado.id_grado
-            inner join detalle_grado_cursos on detalle_grado_usuario_estudiante.id_grado = detalle_grado_cursos.id_grado
-            inner join detalle_curso_usuario_profesor on detalle_grado_cursos.id_detalle_curso_usuario_profesor = detalle_curso_usuario_profesor.id_detalle_curso_usuario_profesor
-            inner join cursos on detalle_curso_usuario_profesor.id_curso = cursos.id_curso
-            where detalle_grado_usuario_estudiante.id_usuario = :id;");
+            $stmt = ConexionDB::conectar()->prepare("SELECT rol.nombre_rol, usuarios.nombre_us , usuarios.apellido_us, grado.nombre_grado, cursos.nombre_curso
+            FROM detalle_grado_usuario_estudiante
+            INNER JOIN usuarios ON detalle_grado_usuario_estudiante.id_usuario = usuarios.id_usuario
+            INNER JOIN rol ON usuarios.id_rol = rol.id_rol
+            INNER JOIN grado ON detalle_grado_usuario_estudiante.id_grado = grado.id_grado
+            LEFT JOIN detalle_grado_cursos ON detalle_grado_usuario_estudiante.id_grado = detalle_grado_cursos.id_grado
+            LEFT JOIN detalle_curso_usuario_profesor ON detalle_grado_cursos.id_detalle_curso_usuario_profesor = detalle_curso_usuario_profesor.id_detalle_curso_usuario_profesor
+            LEFT JOIN cursos ON detalle_curso_usuario_profesor.id_curso = cursos.id_curso
+            WHERE usuarios.id_usuario = :id;");
             $stmt->bindParam(":id", $id, \PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetch();
+            return $stmt->fetchAll();
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
