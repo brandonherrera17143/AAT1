@@ -4,8 +4,12 @@ namespace model\db;
 
 use model\db\ConexionDB;
 
+
+
 class Usuarios
 {
+
+
 
     public static function crearUsuario($datos)
     {
@@ -72,7 +76,7 @@ class Usuarios
     public static function informacionUsuarioCompletaModel($id)
     {
         try {
-            $stmt = ConexionDB::conectar()->prepare("SELECT rol.nombre_rol, usuarios.nombre_us , usuarios.apellido_us, grado.nombre_grado, cursos.nombre_curso
+            $stmt = ConexionDB::conectar()->prepare("SELECT rol.nombre_rol,usuarios.id_usuario, usuarios.nombre_us , usuarios.apellido_us, grado.nombre_grado, cursos.nombre_curso
             FROM detalle_grado_usuario_estudiante
             INNER JOIN usuarios ON detalle_grado_usuario_estudiante.id_usuario = usuarios.id_usuario
             INNER JOIN rol ON usuarios.id_rol = rol.id_rol

@@ -5,10 +5,18 @@ namespace controller\usuarios;
 use model\db\Usuarios;
 use model\db\Profesor;
 
+use controller\trait\usuarios\ListarUsuarios;
+use controller\trait\usuarios\ReporteUsuario;
+use controller\trait\usuarios\ReporteEstudiante;
+
 require_once("helpers/helpers.php");
 
 class UsuariosController
 {
+
+    use ListarUsuarios, ReporteUsuario, ReporteEstudiante;
+
+
     public function crearUsuario()
     {
         if (!empty($_POST["dpi"]) && !empty($_POST["nombre"]) && !empty($_POST["apellido"]) && !empty($_POST["telefono"]) && !empty($_POST["fk_rol"]) && !empty($_POST["usuario"]) && !empty($_POST["contra"])) {
