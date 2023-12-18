@@ -38,8 +38,19 @@ $usuarios = $mostrarUsuarios->mostrarUsuariosController();
                 <td><?php echo $usuario['nombre_rol']; ?></td>
                 <td><?php echo $usuario['usuario']; ?></td>
                 <td>
-                    <a href="index.php?action=informacionUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
-                        <button class="btn btn-info">info</button></a>
+                    <?php if ($usuario['nombre_rol'] == 'Estudiante') : ?>
+                        <a href="index.php?action=informacionUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
+                            <button class="btn btn-info">Estudiante</button>
+                        </a>
+                    <?php elseif ($usuario['nombre_rol'] == 'Profesor') : ?>
+                        <a href="index.php?action=informacionUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">
+                            <button class="btn btn-info">Profesor</button>
+                        </a>
+                    <?php elseif ($usuario['nombre_rol'] == 'Secretaria') : ?>
+                        <a href="index.php?action=pendiente&idUser=<?php echo $usuario['id_usuario']; ?>">
+                            <button class="btn btn-info">Secretaria</button>
+                        </a>
+                    <?php endif; ?>
                 </td>
                 <td>
                     <a href="index.php?action=editarUsuario&idUser=<?php echo $usuario['id_usuario']; ?>">

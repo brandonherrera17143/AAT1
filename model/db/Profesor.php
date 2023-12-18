@@ -9,7 +9,7 @@ class Profesor
     public static function mostrarProfesoresCursosGradoModel($id)
     {
         try {
-            $stmt = ConexionDB::conectar()->prepare("SELECT usuarios.nombre_us, usuarios.apellido_us, rol.nombre_rol, cursos.nombre_curso, grado.nombre_grado, seccion.nombre_seccion
+            $stmt = ConexionDB::conectar()->prepare("SELECT usuarios.id_usuario, usuarios.nombre_us, usuarios.apellido_us, rol.nombre_rol, cursos.nombre_curso, grado.nombre_grado, seccion.nombre_seccion
             FROM usuarios
             INNER JOIN rol ON usuarios.id_rol = rol.id_rol
             INNER JOIN detalle_curso_usuario_profesor ON usuarios.id_usuario = detalle_curso_usuario_profesor.id_usuario

@@ -8,13 +8,14 @@ use model\db\Profesor;
 use controller\trait\usuarios\ListarUsuarios;
 use controller\trait\usuarios\ReporteUsuario;
 use controller\trait\usuarios\ReporteEstudiante;
+use controller\trait\usuarios\ReporteProfe;
 
 require_once("helpers/helpers.php");
 
 class UsuariosController
 {
 
-    use ListarUsuarios, ReporteUsuario, ReporteEstudiante;
+    use ListarUsuarios, ReporteUsuario, ReporteEstudiante, ReporteProfe;
 
 
     public function crearUsuario()
@@ -73,7 +74,8 @@ class UsuariosController
 
             $obtenerRolUsuario = Usuarios::seleccionarUsuarioModel($id);
             $rol = $obtenerRolUsuario['id_rol'];
-            echo $rol;
+
+
             if ($rol == 1) {
                 $respuesta = Profesor::mostrarProfesoresCursosGradoModel($id);
             } else if ($rol == 3) {
